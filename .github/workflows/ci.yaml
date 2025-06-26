@@ -22,4 +22,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: manoj1989/python-app:${{ github.sha.substr(0, 6) }}
+          tags: manoj1989/python-app:${{ github.sha }}
