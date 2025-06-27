@@ -11,7 +11,7 @@ def info():
         'hostname': socket.gethostname(),
         'message': 'You are doing great, little human! <3',
         'deployed_on': 'kubernetes',
-        'message':'you are doing grat!! Manoj!'
+        'message':'you are doing grat!! Manoj!!'
     })
 
 @app.route('/api/v1/healthz')
@@ -20,5 +20,5 @@ def health():
     return jsonify({'status': 'up'}), 200
 
 if __name__ == '__main__':
-    # Start the server only once and after all routes are defined
+    # Start the server only once and after all routes are defgitined
     app.run(host="0.0.0.0", port=8080)
