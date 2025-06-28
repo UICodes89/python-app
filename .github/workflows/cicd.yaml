@@ -42,7 +42,7 @@ jobs:
         run: |
           echo ${{needs.ci.outputs.COMMIT_ID}}
           pip install yq
-          yq -i '.image.tag' = "${{ needs.ci.outputs.commit_id }}" charts/python-app/values.yaml
+          yq -Yi '.image.tag = "${{ needs.ci.outputs.commit_id }}"' charts/python-app/values.yaml
       
       - name: Commit message
         uses: EndBug/add-and-commit@v9
