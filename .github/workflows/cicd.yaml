@@ -36,13 +36,13 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Modify value
         shell: bash
         run: |
           echo ${{needs.ci.outputs.COMMIT_ID}}
           pip install yq
-          yq -Yi '.imgae.tag' = "${{needs.ci.outputs.COMMIT_ID}}" charts/python-app/values.yaml
+          yq -i '.image.tag = "${{ needs.ci.outputs.commit_id }}" charts/python-app/values.yaml
       
       - name: Commit message
         uses: EndBug/add-and-commit@v9
