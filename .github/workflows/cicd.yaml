@@ -48,7 +48,6 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           message: 'update values.yrml with commit id ${{needs.ci.outputs.COMMIT_ID}}'
-          add: 'report.txt'
 
 
 
