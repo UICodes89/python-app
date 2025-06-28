@@ -30,6 +30,12 @@ jobs:
     needs: ci
     runs-on: self-hosted
     steps:
+      - name: Install kubectl
+        shell: bash
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/kubectl
       - name: Grant service account RBAC access
         shell: bash
         run: |
@@ -57,7 +63,8 @@ jobs:
             kind: Role
             name: runner-access
             apiGroup: rbac.authorization.k8s.io
-          EOF              
+          EOF      
+                  
       - name: Install ArgoCD CLI
         shell: bash
         run: |
