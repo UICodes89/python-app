@@ -40,11 +40,11 @@ jobs:
         shell: bash
         run: |
           echo "Trying to log in to ArgoCD..."
-          echo "Secret length: ${#ARGO_PASSWORD}"
+          echo "Secret length: ${#DOCKERHUB_TOKEN}"
           argocd login https://my-release-argocd-server.argocd \
             --insecure  \
             --username admin \
-            --password "${{ secrets.ARGO_PASSWORD }}"
+            --password  ${{ secrets.DOCKERHUB_TOKEN }}
           echo "Syncing ArgoCD app..."
           argocd app sync python-app
           
