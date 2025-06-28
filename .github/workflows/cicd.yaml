@@ -9,6 +9,7 @@ on:
 
 jobs:
   ci:
+
     runs-on: ubuntu-latest
     steps:
       - name: Shorten commit id
@@ -26,11 +27,21 @@ jobs:
         with:
           push: true
           tags: manoj1989/python-app:${{ env.COMMIT_ID }}
+    
+    outputs:
+      commit_id: ${{ env.COMMIT_ID }}
 
   cd:
     needs: ci
     runs-on: self-hosted
     steps:
+      - name: Modify value
+        shell: bash
+        run: |
+          echo ${{needs.ci.outputs.COMMIT_ID}}
+          pip install yq
+          yq -Yi '.imgae.tag' = "${{needs.ci.outputs.COMMIT_ID}}" charts/python-app/values.yaml
+
       - name: Install kubectl
         shell: bash
         run: |
