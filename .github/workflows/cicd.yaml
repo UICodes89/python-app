@@ -44,7 +44,7 @@ jobs:
           argocd login https://my-release-argocd-server.argocd \
             --insecure  \
             --username admin \
-            --password  ${{ secrets.DOCKERHUB_TOKEN }}
+            --password admin123 \
           echo "Syncing ArgoCD app..."
           argocd app sync python-app
           
