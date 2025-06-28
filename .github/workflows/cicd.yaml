@@ -49,7 +49,11 @@ jobs:
         shell: bash
         run: |
           echo "Logging in to ArgoCD (core mode)..."
-          argocd login --core
+          argocd login my-release-argocd-server.argocd \
+          --insecure \
+          --grpc-web \
+          --username admin \
+          --password "admin123"
 
           echo "Syncing ArgoCD app..."
           argocd app sync python-app
