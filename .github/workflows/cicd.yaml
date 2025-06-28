@@ -39,10 +39,13 @@ jobs:
       - name: Argocd app Sync
         shell: bash
         run: |
+          echo "Trying to log in to ArgoCD..."
           argocd login https://my-release-argocd-server.argocd \
             --insecure  \
             --username admin \
             --password "${{ secrets.ARGO_PASSWORD }}"
+          echo "Syncing ArgoCD app..."
+          echo "Secret length: ${#ARGO_PASSWORD}"
           argocd app sync python-app
           
 
