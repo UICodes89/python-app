@@ -1,4 +1,4 @@
-name: ci
+name: cicd
 
 on:
   push:
@@ -8,8 +8,8 @@ on:
       - main
 
 jobs:
-  docker:
-    runs-on: self-hosted
+  ci:
+    runs-on: ubantu-latest
     steps:
       - name: Shorten commit id
         shell: bash
@@ -26,3 +26,17 @@ jobs:
         with:
           push: true
           tags: manoj1989/python-app:${{ env.COMMIT_ID }}
+  cd:
+    needs: ci
+    runs-on: self-hosted
+    steps:
+      - name: Argocd app Sync
+        shell: bash
+        run: |
+          argocd login https://my-release-argocd-server.argocd \
+            --insecure  \
+            --username admin \
+            --password {{secrets.ARGO_PASSWORD}}
+          argocd app sync python-app
+          
+
