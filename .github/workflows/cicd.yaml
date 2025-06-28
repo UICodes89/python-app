@@ -42,7 +42,7 @@ jobs:
         run: |
           echo "Trying to log in to ArgoCD..."
 
-          argocd login "https://my-release-argocd-server.argocd" \
+          argocd login --core "https://my-release-argocd-server.argocd" \
             --insecure \
             --username admin \
             --password "admin123"
